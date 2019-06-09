@@ -35,6 +35,7 @@
         if (isNullOrEmpty(user)) {
           user = "Guest"
         }
+        user.substring(0, 10);
         cookie.set("user", user);
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
@@ -44,6 +45,7 @@
         if (isNullOrEmpty(user)) {
           user = "Guest"
         }
+        user.substring(0, 10);
         cookie.set("user", user);
         document.getElementsByClassName("user")[0].innerHTML = user;
       }
