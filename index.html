@@ -32,7 +32,7 @@
       var user = cookie.get("user");
       if (!user) {
         user = prompt("Choose a username");
-        if (!isNullOrEmpty(user)) {
+        if (isNullOrEmpty(user)) {
           user = "Guest"
         }
         cookie.set("user", user);
@@ -41,7 +41,7 @@
       
       function changeUser() {
         user = prompt("Choose a username");
-        if (!isNullOrEmpty(user)) {
+        if (isNullOrEmpty(user)) {
           user = "Guest"
         }
         cookie.set("user", user);
