@@ -20,13 +20,30 @@
       </section>
 
       <form>
-        <input type="text" placeholder="Say something nice" />
-        <button>Send</button>
+        <input id="message" type="text" placeholder="Say something nice" />
+        <button onclick="send();">Send</button>
       </form>
     </main>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://unpkg.com/cookie_js@1.2.2/cookie.min.js"></script>
     <script src="https://unpkg.com/socket.io-client@2/dist/socket.io.slim.js"></script>
+    <script>
+      var user = cookie.get("user");
+      if (!user) {
+        user = prompt("Choose a username");
+        if (!user || user===" ") {
+          user = "Guest"
+        }
+        cookie.set("user", user);
+      }
+      
+      function send() {
+        var msg = document.getElementById("message").value;
+        var chat = document.getElementsByClassName("chat")[0]
+        
+        chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg;
+      }
+    </script>
   </body>
 </html>
