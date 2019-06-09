@@ -10,7 +10,7 @@
   <body>
     <main>
       <header>
-        <div class="user"></div>
+        <div onclick="changeUser();" class="user"></div>
         <h1>Chat</h1>
       </header>
 
@@ -39,11 +39,20 @@
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
       
+      function changeUser() {
+        user = prompt("Choose a username");
+        if (!user || user===" ") {
+          user = "Guest"
+        }
+        cookie.set("user", user);
+      }
+      
       function send() {
         var msg = document.getElementById("message").value;
         var chat = document.getElementsByClassName("chat")[0];
         if (msg) {
           chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg; + "</p>";
+          msg = ""
         }
       }
     </script>
