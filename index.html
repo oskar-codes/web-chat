@@ -55,6 +55,7 @@
         if (msg) {
           chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg + "</p>";
           msgBox.value = "";
+          chat.scrollTop = chat.scrollHeight;
         }
       }
     </script>
