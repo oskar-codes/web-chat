@@ -45,14 +45,15 @@
           user = "Guest"
         }
         cookie.set("user", user);
+        document.getElementsByClassName("user")[0].innerHTML = user;
       }
       
       function send() {
         var msg = document.getElementById("message").value;
         var chat = document.getElementsByClassName("chat")[0];
         if (msg) {
-          chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg; + "</p>";
-          msg = ""
+          chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg + "</p>";
+          msg = "";
         }
       }
     </script>
