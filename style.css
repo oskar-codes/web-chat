@@ -34,7 +34,7 @@ h1, .user {
   height: calc(100vh - 165px);
   background: white;
   padding: 5px 10px;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .chat p {
