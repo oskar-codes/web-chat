@@ -49,7 +49,7 @@
         var object = {
           user: usr,
           message: msg,
-          html: "<p><strong>" + usr + "</strong>: " + msg + "</p>"
+          html: "<p><strong>" + usr + "</strong>: " + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p>"
         };
 
         firebase.database().ref('messages').push().set(object)
@@ -64,7 +64,7 @@
       messagesRef.on('child_added', (snapshot) => {
         console.log('message was added: ' + snapshot.val().html);
         var chat = document.getElementsByClassName("chat")[0];
-        chat.innerHTML += snapshot.val().html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        chat.innerHTML += snapshot.val().html;
       });
     </script>
     
