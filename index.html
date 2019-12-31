@@ -77,6 +77,7 @@
           user = "Guest"
         }
         user = user.substring(0, 10);
+        user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         localStorage.setItem("user", user);
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
@@ -87,6 +88,7 @@
           user = "Guest"
         }
         user = user.substring(0, 10);
+        user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         localStorage.setItem("user", user);
         document.getElementsByClassName("user")[0].innerHTML = user;
       }
