@@ -96,7 +96,6 @@
         var msg = msgBox.value;
         var chat = document.getElementsByClassName("chat")[0];
         if (!isNullOrEmpty(msg)) {
-          // chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg + "</p>";
           msgBox.value = "";
           chat.scrollTop = chat.scrollHeight;
           saveToFirebase(msg, user);
