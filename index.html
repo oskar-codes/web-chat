@@ -60,9 +60,10 @@
             });
       }
       
-      firebase.database().ref('messages').onCreate = function(e) {
-        console.log(e);
-      }
+      var messagesRef  = database.ref('messages');
+      messagesRef.on('child_added', (snapshot) => {
+        console.log('message was added: ' + snapshot);
+      });
     </script>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
