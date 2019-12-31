@@ -15,8 +15,7 @@
       </header>
 
       <div class="chat" style="overflow-y: scroll; overflow-x: hidden;">
-        <p><strong>Test1</strong>: Hello</p>
-        <p><strong>Test2</strong>: Hi</p>
+        
       </div>
 
       <form onsubmit="send();" onkeypress="return event.keyCode!=13">
@@ -48,8 +47,9 @@
       
       function saveToFirebase(msg, usr) {
         var object = {
-            message: msg,
-            user: usr
+          user: usr,
+          message: msg,
+          html: "<p><strong>" + usr + "</strong>: " + msg + "</p>"
         };
 
         firebase.database().ref('messages').push().set(object)
@@ -58,6 +58,10 @@
             }, function(error) {
                 console.log('An error occured: ' + error);
             });
+      }
+      
+      firebase.database().ref('messages').onCreate = function(e) {
+        console.log(e);
       }
     </script>
     
