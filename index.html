@@ -36,7 +36,7 @@
           user = "Guest"
         }
         user = user.substring(0, 10);
-        LocalStorage.setItem("user", user);
+        localStorage.setItem("user", user);
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
       
@@ -46,7 +46,7 @@
           user = "Guest"
         }
         user = user.substring(0, 10);
-        cookie.set("user", user);
+        localStorage.setItem("user", user);
         document.getElementsByClassName("user")[0].innerHTML = user;
       }
       
