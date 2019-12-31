@@ -60,7 +60,7 @@
             });
       }
       
-      var messagesRef  = database.ref('messages');
+      var messagesRef  = firebase.database.ref('messages');
       messagesRef.on('child_added', (snapshot) => {
         console.log('message was added: ' + snapshot);
       });
