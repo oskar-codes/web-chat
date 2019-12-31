@@ -63,6 +63,8 @@
       var messagesRef  = firebase.database().ref('messages');
       messagesRef.on('child_added', (snapshot) => {
         console.log('message was added: ' + snapshot);
+        var chat = document.getElementsByClassName("chat")[0];
+        chat.innerHTML += snapshot.html;
       });
     </script>
     
@@ -94,7 +96,7 @@
         var msg = msgBox.value;
         var chat = document.getElementsByClassName("chat")[0];
         if (!isNullOrEmpty(msg)) {
-          chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg + "</p>";
+          // chat.innerHTML += "<p><strong>" + user + "</strong>: " + msg + "</p>";
           msgBox.value = "";
           chat.scrollTop = chat.scrollHeight;
           saveToFirebase(msg, user);
