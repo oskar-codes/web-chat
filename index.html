@@ -80,9 +80,12 @@
 
         firebase.database().ref('messages').push().set(object)
         .then(function(snapshot) {
-            console.log("Message successfully sent!");
+          console.log("Message successfully sent!");
         }, function(error) {
-            console.log(error);
+          console.log(error);
+          var chat = document.getElementsByClassName("chat")[0];
+          chat.innerHTML += "<p style='color: red;'>Your message failed to send. Please check you internet connection and try again.</p><hr>";
+          chat.scrollBy(0, 100000);
         });
       }
       
