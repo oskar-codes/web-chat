@@ -32,46 +32,7 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyA2OMVp6D5IksJo8EJgWsyI0UV9bm08c8A",
-        authDomain: "github-web-chat.firebaseapp.com",
-        databaseURL: "https://github-web-chat.firebaseio.com",
-        projectId: "github-web-chat",
-        storageBucket: "github-web-chat.appspot.com",
-        messagingSenderId: "165990792894",
-        appId: "1:165990792894:web:8f2ec6b1984e71e24ca8ef"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      
-      function saveToFirebase(msg, usr) {
-        var object = {
-          user: usr,
-          message: msg,
-          time: getDateTime(), 
-          html: "<p><strong>" + usr + "</strong> ("+ getDateTime() +"):</p><p style='margin-left: 7px;'>" + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p><hr>"
-        };
-
-        firebase.database().ref('messages').push().set(object)
-            .then(function(snapshot) {
-                console.log("Message successfully sent!");
-            }, function(error) {
-                console.log('An error occured: ' + error);
-            });
-      }
-      
-      var messagesRef  = firebase.database().ref('messages');
-      messagesRef.on('child_added', (snapshot) => {
-        console.log('message was added: ' + snapshot.val().html);
-        var chat = document.getElementsByClassName("chat")[0];
-        chat.innerHTML += snapshot.val().html;
-        chat.scrollBy(0, 100000);
-      });
-    </script>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script>
+      /*** INITIALIZE USERNAME ***/
       var user = localStorage.getItem("user");
       if (!user) {
         user = prompt("Choose a username");
@@ -84,6 +45,7 @@
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
       
+      /*** CHANGE USERNAME ***/
       function changeUser() {
         user = prompt("Choose a username");
         if (isNullOrEmpty(user)) {
@@ -95,6 +57,44 @@
         document.getElementsByClassName("user")[0].innerHTML = user;
       }
       
+      /*** FIREBASE CONFIGURATION ***/
+      var firebaseConfig = {
+        apiKey: "AIzaSyA2OMVp6D5IksJo8EJgWsyI0UV9bm08c8A",
+        authDomain: "github-web-chat.firebaseapp.com",
+        databaseURL: "https://github-web-chat.firebaseio.com",
+        projectId: "github-web-chat",
+        storageBucket: "github-web-chat.appspot.com",
+        messagingSenderId: "165990792894",
+        appId: "1:165990792894:web:8f2ec6b1984e71e24ca8ef"
+      };
+      firebase.initializeApp(firebaseConfig);
+      
+      /*** FORMAT MESSAGE OBJECT AND PUSH IT TO THE FIREBASE DATABASE ***/
+      function saveToFirebase(msg, usr) {
+        var object = {
+          user: usr,
+          message: msg,
+          time: getDateTime(), 
+          html: "<p><strong>" + usr + "</strong> ("+ getDateTime() +"):</p><p style='margin-left: 7px;'>" + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p><hr>"
+        };
+
+        firebase.database().ref('messages').push().set(object)
+        .then(function(snapshot) {
+            console.log("Message successfully sent!");
+        }, function(error) {
+            console.log(error);
+        });
+      }
+      
+      /*** LISTEN FOR NEW MESSAGES FROM THE FIREBASE DATABASE ***/
+      var messagesRef  = firebase.database().ref('messages');
+      messagesRef.on('child_added', (snapshot) => {
+        var chat = document.getElementsByClassName("chat")[0];
+        chat.innerHTML += snapshot.val().html;
+        chat.scrollBy(0, 100000);
+      });
+      
+      /*** HANDLE MESSAGE BEFORE SENDING ***/
       function send() {
         var msgBox = document.getElementById("message");
         var msg = msgBox.value;
@@ -106,12 +106,14 @@
         }
       }
       
+      /*** ALLOW USE OF "ENTER" KEY TO SEND MESSAGE ***/
       document.getElementById("message").onkeyup = function(e) {
         if (e.key === "Enter") {
           send();
         }
       }
       
+      /*** HELPER FUNCTIONS ***/
       function isNullOrEmpty(str) {
         return !str || !str.trim();
       }
