@@ -14,7 +14,7 @@
         <h1>Chat</h1>
       </header>
 
-      <div class="chat" style="overflow-y: scroll; overflow-x: hidden;">
+      <div class="chat" style="overflow-y: scroll; overflow-wrap: break-word;">
         
       </div>
 
@@ -100,7 +100,7 @@
         var chat = document.getElementsByClassName("chat")[0];
         if (!isNullOrEmpty(msg)) {
           msgBox.value = "";
-          chat.scrollTop = chat.scrollHeight;
+          chat.scrollBy(0, 100000);
           saveToFirebase(msg, user);
         }
       }
