@@ -25,7 +25,26 @@
       </form>
     </main>
     
-    <?php include "server-logic.php";?>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyA2OMVp6D5IksJo8EJgWsyI0UV9bm08c8A",
+        authDomain: "github-web-chat.firebaseapp.com",
+        databaseURL: "https://github-web-chat.firebaseio.com",
+        projectId: "github-web-chat",
+        storageBucket: "github-web-chat.appspot.com",
+        messagingSenderId: "165990792894",
+        appId: "1:165990792894:web:8f2ec6b1984e71e24ca8ef"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script>
