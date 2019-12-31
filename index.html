@@ -64,7 +64,7 @@
       messagesRef.on('child_added', (snapshot) => {
         console.log('message was added: ' + snapshot.val().html);
         var chat = document.getElementsByClassName("chat")[0];
-        chat.innerHTML += snapshot.val().html;
+        chat.innerHTML += snapshot.val().html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       });
     </script>
     
