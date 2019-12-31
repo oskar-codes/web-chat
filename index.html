@@ -44,6 +44,20 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+      
+      function saveToFirebase(msg, usr) {
+        var object = {
+            message: msg,
+            user: usr
+        };
+
+        firebase.database().ref('messages').push().set(object)
+            .then(function(snapshot) {
+                console.log("Message successfully sent!");
+            }, function(error) {
+                console.log('An error occured: ' + error);
+            });
+      }
     </script>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -89,21 +103,6 @@
       
       function isNullOrEmpty(str) {
         return !str || !str.trim();
-      }
-      
-      function saveToFirebase(msg, usr) {
-        var object = {
-            message: msg,
-            user: usr
-        };
-
-        firebase.database().ref('messages').push().set(object)
-            .then(function(snapshot) {
-                success(); // some success method
-            }, function(error) {
-                console.log('error' + error);
-                error(); // some error method
-            });
       }
     </script>
   </body>
