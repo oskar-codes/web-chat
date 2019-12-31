@@ -61,6 +61,12 @@
         }
       }
       
+      document.getElementById("message").onkeyup = function(e) {
+        if (e.key === "Enter") {
+          send();
+        }
+      }
+      
       function isNullOrEmpty(str) {
         return !str || !str.trim();
       }
