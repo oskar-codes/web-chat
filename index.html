@@ -57,7 +57,7 @@
       
       /*** CHANGE USERNAME ***/
       function changeUser() {
-        user = prompt("Choose a username");
+        user = prompt("Choose a username", user);
         if (user != null) {
           if (isNullOrEmpty(user)) {
             user = "Guest"
