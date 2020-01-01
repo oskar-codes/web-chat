@@ -57,13 +57,14 @@
       
       /*** CHANGE USERNAME ***/
       function changeUser() {
-        user = prompt("Choose a username", user);
-        if (user != null) {
-          if (isNullOrEmpty(user)) {
-            user = "Guest"
+        var newUser = prompt("Choose a username", user);
+        if (newUser != null) {
+          if (isNullOrEmpty(newUser)) {
+            newUser = "Guest"
           }
-          user = user.substring(0, 10);
-          user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          newUser = newUser.substring(0, 10);
+          newUser = newUser.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
         }
