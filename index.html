@@ -33,14 +33,14 @@
 
     <script>
       var displayNotifications = false;
-      window.setTimeout(function() {
-        displayNotifications = true;
-      }, 2000)
-      
-      
-      Notification.requestPermission().then(function(result) {
-        console.log(result);
-      });
+      if ('Notification' in window) {
+        window.setTimeout(function() {
+          displayNotifications = true;
+        }, 2000) 
+        Notification.requestPermission().then(function(result) {
+          console.log(result);
+        });
+      }
       
       /*** INITIALIZE USERNAME ***/
       var user = localStorage.getItem("user");
