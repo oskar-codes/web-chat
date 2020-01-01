@@ -32,6 +32,11 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+      var displayNotifications = false;
+      winow.setTimeout(function() {
+        displayNotifications = true;
+      }, 2000)
+      
       
       Notification.requestPermission().then(function(result) {
         console.log(result);
@@ -104,8 +109,10 @@
         chat.scrollBy(0, 100000);
         
         /*** DISPLAY NOTIFICATION ***/
-        var text = usr + ": " + msg;
-        var notification = new Notification('Web Chat', {body: text});
+        if (displayNotifications && usr != user) {
+          var text = usr + ": " + msg;
+          var notification = new Notification('Web Chat', {body: text});
+        }
       });
       
       /*** HANDLE MESSAGE BEFORE SENDING ***/
