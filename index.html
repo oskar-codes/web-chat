@@ -102,6 +102,10 @@
         var time = snapshot.val().time;
         chat.innerHTML += "<p><strong>" + usr + "</strong> ("+ time +"):</p><p style='margin-left: 7px;'>" + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p><hr>";
         chat.scrollBy(0, 100000);
+        
+        /*** DISPLAY NOTIFICATION ***/
+        var text = usr + ": " + msg;
+        var notification = new Notification('Web Chat', {body: text});
       });
       
       /*** HANDLE MESSAGE BEFORE SENDING ***/
