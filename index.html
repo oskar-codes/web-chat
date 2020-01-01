@@ -32,6 +32,11 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+      
+      Notification.requestPermission().then(function(result) {
+        console.log(result);
+      });
+      
       /*** INITIALIZE USERNAME ***/
       var user = localStorage.getItem("user");
       if (!user) {
