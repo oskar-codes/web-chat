@@ -31,7 +31,7 @@ h1, .user {
 .chat {
   content: '';
   width: 100%;
-  height: calc(100vh - 165px);
+  height: calc(100vh - 200px); /* 165px */
   background: white;
   padding: 5px 10px;
 }
