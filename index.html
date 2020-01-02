@@ -87,8 +87,7 @@
         var object = {
           user: usr,
           message: msg,
-          time: getDateTime(),
-          ip: getIp()
+          time: getDateTime()
         };
 
         firebase.database().ref('messages').push().set(object)
