@@ -95,10 +95,10 @@
         firebase.database().ref('messages').push().set(object)
         .then(function(snapshot) {
           console.log("Message successfully sent!");
-        }, function(error) {
-          console.log(error);
+        }, function(e) {
+          console.log(e);
           var chat = document.getElementsByClassName("chat")[0];
-          chat.innerHTML += "<p style='color: red;'>Your message failed to send. Please check you internet connection and try again.</p><hr>";
+          chat.innerHTML += "<p style='color: red;'>"+ e +"</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
         });
       }
