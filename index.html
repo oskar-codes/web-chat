@@ -32,6 +32,7 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+      
       var displayNotifications = false;
       if ('Notification' in window) {
         window.setTimeout(function() {
@@ -68,6 +69,9 @@
           user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
+          firebase.database().ref('users/' + userData.val()).set({
+            name: user
+          });
         }
       }
       
@@ -138,6 +142,28 @@
           send();
         }
       }
+      
+      /*** HANDLE USER PRESENCE ***/
+      window.onload = function() {
+        var object = {
+          name: user;
+        }
+        firebase.database().ref('users').push().set(object)
+          .then(function(snapshot) {
+            var userData = snapshot;
+          }, function(e) {
+            console.log(e);
+          });
+      }
+      
+      window.onbeforeunload = function() {
+        firebase.database().ref('users/' + userData.val()).remove();
+      }
+      
+      var usersRef  = firebase.database().ref('users');
+      usersRef.on('value', (snapshot) => {
+        
+      });
       
       /*** HELPER FUNCTIONS ***/
       function isNullOrEmpty(str) {
