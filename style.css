@@ -54,10 +54,9 @@ button:hover {
   background: #ddd;
 }
 
-@media all and (min-width: 500px) {
+@media all and (min-width: 500px) { /* Landscape */
   .chat {
     height: calc(100vh - 200px); /* 140px */
-    background-color: red;
   }
   input {
     width: calc(100% - 160px);
