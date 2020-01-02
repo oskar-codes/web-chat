@@ -69,9 +69,9 @@
           user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
-          firebase.database().ref('users/' + userData.val()).set({
+          /*firebase.database().ref('users/' + userData.val()).set({
             name: user
-          });
+          });*/
         }
       }
       
@@ -144,7 +144,7 @@
       }
       
       /*** HANDLE USER PRESENCE ***/
-      window.onload = function() {
+      /*window.onload = function() {
         var object = {
           name: user;
         }
@@ -163,7 +163,7 @@
       var usersRef  = firebase.database().ref('users');
       usersRef.on('value', (snapshot) => {
         
-      });
+      });*/
       
       /*** HELPER FUNCTIONS ***/
       function isNullOrEmpty(str) {
