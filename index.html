@@ -44,6 +44,7 @@
       
       /*** INITIALIZE USERNAME ***/
       var user = localStorage.getItem("user");
+      var userIp = "";
       if (!user) {
         user = prompt("Choose a username");
         if (isNullOrEmpty(user)) {
@@ -87,7 +88,8 @@
         var object = {
           user: usr,
           message: msg,
-          time: getDateTime()
+          time: getDateTime(),
+          ip: userIp
         };
 
         firebase.database().ref('messages').push().set(object)
@@ -143,7 +145,7 @@
       }
       
       function getIp(json) {
-        return json.ip;
+        userIp = json.ip;
       }
       
       function getDateTime() {
