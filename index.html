@@ -98,7 +98,7 @@
         }, function(e) {
           console.log(e);
           var chat = document.getElementsByClassName("chat")[0];
-          chat.innerHTML += "<p style='color: red;'>"+ e +"</p><hr style='border-color: #ddd; border-style: solid;'>";
+          chat.innerHTML += "<p style='color: red;'>Your message failed to send:<br>"+ e +"</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
         });
       }
