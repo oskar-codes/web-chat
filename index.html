@@ -39,7 +39,7 @@
           displayNotifications = true;
         }, 2000) 
         Notification.requestPermission().then(function(result) {
-          console.log(result);
+          console.log("Notifications access status: "+result);
         });
       }
       
