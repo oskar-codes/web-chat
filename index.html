@@ -142,6 +142,10 @@
         return !str || !str.trim();
       }
       
+      function getIP(json) {
+        return json.ip;
+      }
+      
       function getDateTime() {
         var now     = new Date(); 
         var year    = now.getFullYear();
@@ -169,5 +173,6 @@
          return dateTime;
       }
     </script>
+    <script src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
   </body>
 </html>
