@@ -31,7 +31,7 @@ h1, .user {
 .chat {
   content: '';
   width: 100%;
-  height: calc(100vh - 300px); /* 165px */
+  height: calc(100vh - 200px); /* 165px */
   background: white;
   padding: 5px 10px;
 }
@@ -56,7 +56,7 @@ button:hover {
 
 @media all and (min-width: 500px) {
   .chat {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 200px); /* 140px */
   }
   input {
     width: calc(100% - 160px);
