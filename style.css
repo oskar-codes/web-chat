@@ -26,6 +26,7 @@ h1, .user {
 
 .user {
   float: right;
+  cursor: pointer;
 }
 
 .chat {
