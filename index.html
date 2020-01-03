@@ -42,11 +42,13 @@
       }
       
       function changeRoom() {
-        var result = prompt("Enter a room id. The room will be created if it doesn't exist.", room);
-        if (result == true) {
-          window.location.href = "https://oskar-codes.github.io/firebase-chat";
-        } else {
-          window.location.href = "https://oskar-codes.github.io/firebase-chat?room=" + result;
+        var result = prompt("Enter a room id. The room will be created if it doesn't exist. An empty room id brings you back to the global room.", room);
+        if (result != null) {
+          if (result == true) {
+            window.location.href = "https://oskar-codes.github.io/firebase-chat";
+          } else {
+            window.location.href = "https://oskar-codes.github.io/firebase-chat?room=" + result;
+          }
         }
       }
       
