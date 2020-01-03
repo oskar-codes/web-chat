@@ -39,7 +39,7 @@
         room = "";
         title.innerHTML = "Chat (Global)";
       } else if (room == true) {
-        window.location.href = "https://oskar-codes.github.io/firebase-chat";
+        window.location.href = "https://oskar-codes.github.io/web-chat";
       } else {
         title.innerHTML = "Chat ("+ decodeURIComponent(room) +")";
       }
@@ -51,9 +51,9 @@
           result = result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
           result = result.substring(0, 20);
           if (isNullOrEmpty(result)) {
-            window.location.href = "https://oskar-codes.github.io/firebase-chat";
+            window.location.href = "https://oskar-codes.github.io/web-chat";
           } else {
-            window.location.href = "https://oskar-codes.github.io/firebase-chat?room=" + result;
+            window.location.href = "https://oskar-codes.github.io/web-chat?room=" + result;
           }
         }
       }
