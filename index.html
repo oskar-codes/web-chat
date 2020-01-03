@@ -46,7 +46,7 @@
       
       /*** HANDLE ROOM CHANGE ***/
       function changeRoom() {
-        var result = prompt("Enter a room id. The room will be created if it doesn't exist. An empty room id brings you back to the global room.", room);
+        var result = prompt("Enter a room id. The room will be created if it doesn't exist. An empty room id brings you back to the global room.", decodeURIComponent(room));
         if (result != null) {
           result = result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
           result = result.substring(0, 20);
