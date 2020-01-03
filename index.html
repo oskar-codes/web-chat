@@ -37,6 +37,8 @@
       if (room == undefined) {
         room = "";
         title.innerHTML = "Chat (Global)";
+      } else if (room == true) {
+        window.location.href = "https://oskar-codes.github.io/firebase-chat";
       } else {
         title.innerHTML = "Chat ("+ room +")";
       }
