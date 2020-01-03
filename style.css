@@ -22,11 +22,11 @@ h1, .user {
   margin: 0;
   padding: 10px 0;
   font-size: 32px;
+  cursor: pointer;
 }
 
 .user {
   float: right;
-  cursor: pointer;
 }
 
 .chat {
