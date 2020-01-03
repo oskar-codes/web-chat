@@ -11,7 +11,7 @@
     <main>
       <header>
         <div onclick="changeUser();" class="user"></div>
-        <h1>Chat</h1>
+        <h1 onclick="changeRoom();">Chat</h1>
       </header>
 
       <div class="chat" style="overflow-y: scroll; overflow-wrap: break-word;">
@@ -32,6 +32,19 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+      var room = getAllUrlParams().room;
+      var title = document.getElementsByTagName("h1")[0];
+      if (room == undefined) {
+        room = "";
+        title.innerHTML = "Chat (Global)";
+      } else {
+        title.innerHTML = "Chat ("+ room +")";
+      }
+      
+      function changeRoom() {
+        var result = prompt("Enter a room id. The room will be created if it doesn't exist.", room);
+        window.location.href = "https://oskar-codes.github.io/firebase-chat?room=" + result;
+      }
       
       var displayNotifications = false;
       if ('Notification' in window) {
@@ -69,9 +82,6 @@
           user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
-          /*firebase.database().ref('users/' + userData.val()).set({
-            name: user
-          });*/
         }
       }
       
@@ -96,7 +106,7 @@
           ip: userIp
         };
 
-        firebase.database().ref('messages').push().set(object)
+        firebase.database().ref('messages' + room).push().set(object)
         .then(function(snapshot) {
           console.log("Message successfully sent!");
         }, function(e) {
@@ -108,7 +118,7 @@
       }
       
       /*** LISTEN FOR NEW MESSAGES FROM THE FIREBASE DATABASE AND FORMAT THEM ***/
-      var messagesRef  = firebase.database().ref('messages');
+      var messagesRef  = firebase.database().ref('messages' + room);
       messagesRef.on('child_added', (snapshot) => {
         var chat = document.getElementsByClassName("chat")[0];
         var usr = snapshot.val().user;
@@ -142,28 +152,6 @@
           send();
         }
       }
-      
-      /*** HANDLE USER PRESENCE ***/
-      /*window.onload = function() {
-        var object = {
-          name: user;
-        }
-        firebase.database().ref('users').push().set(object)
-          .then(function(snapshot) {
-            var userData = snapshot;
-          }, function(e) {
-            console.log(e);
-          });
-      }
-      
-      window.onbeforeunload = function() {
-        firebase.database().ref('users/' + userData.val()).remove();
-      }
-      
-      var usersRef  = firebase.database().ref('users');
-      usersRef.on('value', (snapshot) => {
-        
-      });*/
       
       /*** HELPER FUNCTIONS ***/
       function isNullOrEmpty(str) {
@@ -199,6 +187,42 @@
         }   
         var dateTime = day+'/'+month+'/'+year+' '+hour+':'+minute;   
          return dateTime;
+      }
+      
+      function getAllUrlParams(url) {
+        var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+        var obj = {};
+        if (queryString) {
+          queryString = queryString.split('#')[0];
+          var arr = queryString.split('&');
+          for (var i = 0; i < arr.length; i++) {
+            var a = arr[i].split('=');
+            var paramName = a[0];
+            var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+            paramName = paramName.toLowerCase();
+            if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+            if (paramName.match(/\[(\d+)?\]$/)) {
+              var key = paramName.replace(/\[(\d+)?\]/, '');
+              if (!obj[key]) obj[key] = [];
+              if (paramName.match(/\[\d+\]$/)) {
+                var index = /\[(\d+)\]/.exec(paramName)[1];
+                obj[key][index] = paramValue;
+              } else {
+                obj[key].push(paramValue);
+              }
+            } else {
+              if (!obj[paramName]) {
+                obj[paramName] = paramValue;
+              } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+                obj[paramName] = [obj[paramName]];
+                obj[paramName].push(paramValue);
+              } else {
+                obj[paramName].push(paramValue);
+              }
+            }
+          }
+        }
+        return obj;
       }
     </script>
     <script src="https://api.ipify.org?format=jsonp&callback=getIp"></script>
