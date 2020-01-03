@@ -41,7 +41,7 @@
       } else if (room == true) {
         window.location.href = "https://oskar-codes.github.io/firebase-chat";
       } else {
-        title.innerHTML = "Chat ("+ room +")";
+        title.innerHTML = "Chat ("+ decodeURIComponent(room) +")";
       }
       
       /*** HANDLE ROOM CHANGE ***/
