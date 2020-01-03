@@ -32,6 +32,7 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
     <script>
+      /*** SETUP CURRENT ROOM ***/
       var room = getAllUrlParams().room;
       var title = document.getElementsByTagName("h1")[0];
       if (room == undefined) {
@@ -43,9 +44,11 @@
         title.innerHTML = "Chat ("+ room +")";
       }
       
+      /*** HANDLE ROOM CHANGE ***/
       function changeRoom() {
         var result = prompt("Enter a room id. The room will be created if it doesn't exist. An empty room id brings you back to the global room.", room);
         result = result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        result = result.substring(0, 20);
         if (result != null) {
           if (isNullOrEmpty(result)) {
             window.location.href = "https://oskar-codes.github.io/firebase-chat";
@@ -55,6 +58,7 @@
         }
       }
       
+      /*** HANDLE NOTIFICATIONS PERMISSION ***/
       var displayNotifications = false;
       if ('Notification' in window) {
         window.setTimeout(function() {
