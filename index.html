@@ -77,7 +77,7 @@
         if (isNullOrEmpty(user)) {
           user = "Guest"
         }
-        user = user.substring(0, 20);
+        user = user.substring(0, 35);
         user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         localStorage.setItem("user", user);
       }
@@ -90,7 +90,7 @@
           if (isNullOrEmpty(newUser)) {
             newUser = "Guest"
           }
-          newUser = newUser.substring(0, 20);
+          newUser = newUser.substring(0, 35);
           newUser = newUser.replace(/</g, "&lt;").replace(/>/g, "&gt;");
           user = newUser;
           localStorage.setItem("user", user);
