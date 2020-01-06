@@ -41,7 +41,7 @@
       } else if (room == true) {
         window.location.href = "https://oskar-codes.github.io/web-chat";
       } else {
-        title.innerHTML = "Chat ("+ decodeURIComponent(room.replace(/</g, "&lt;").replace(/>/g, "&gt;")) +")";
+        title.innerHTML = "Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;") +")";
       }
       
       /*** HANDLE ROOM CHANGE ***/
