@@ -207,7 +207,7 @@
          return dateTime;
       }
       
-      function toDataURL(src, callback) {
+      /*function toDataURL(src, callback) {
         var request = new XMLHttpRequest();
         request.onload = function() {
           var fileReader = new FileReader();
@@ -227,7 +227,7 @@
         toDataURL(path, function(dataURL) {
           file = dataURL;
         }
-      }
+      }*/
       
       function getAllUrlParams(url) {
         var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
