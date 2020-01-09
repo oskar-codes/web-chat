@@ -155,6 +155,7 @@
         if (!isNullOrEmpty(msg)) {
           msgBox.value = "";
           chat.scrollBy(0, 100000);
+          msg = msg.substring(0, 100);
           saveToFirebase(msg, user);
         }
       }
