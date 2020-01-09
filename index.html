@@ -42,7 +42,7 @@
         window.location.href = "https://oskar-codes.github.io/web-chat";
       } else {
         title.innerHTML = "Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;") +")";
-        window.document.title = "Web Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;") +") | Oskar Codes";
+        window.document.title = decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;") +" | Oskar Codes";
       }
       
       /*** HANDLE ROOM CHANGE ***/
