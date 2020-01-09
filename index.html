@@ -213,9 +213,9 @@
           var fileReader = new FileReader();
           fileReader.onloadend = function() {
             callback(fileReader.result);
-          };
+          }
           fileReader.readAsDataURL(request.response);
-        };
+        }
 
         request.responseType = "blob";
         request.open("GET", src, true);
