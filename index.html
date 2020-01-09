@@ -19,6 +19,7 @@
       </div>
 
       <form onsubmit="send();" onkeypress="return event.keyCode!=13">
+        <input type="file" id="file"></input>
         <input maxlength="200" id="message" type="text" placeholder="Say something nice" />
         <button type="button" onclick="send();">Send</button>
       </form>
@@ -73,6 +74,7 @@
       /*** INITIALIZE USERNAME ***/
       var user = localStorage.getItem("user");
       var userIp = "";
+      var file = "none";
       if (!user) {
         user = prompt("Choose a username");
         if (isNullOrEmpty(user)) {
@@ -116,6 +118,7 @@
         var object = {
           user: usr,
           message: msg,
+          file: file,
           time: getDateTime(),
           ip: userIp
         };
@@ -202,6 +205,28 @@
         }   
         var dateTime = day+'/'+month+'/'+year+' '+hour+':'+minute;   
          return dateTime;
+      }
+      
+      function toDataURL(src, callback) {
+        var request = new XMLHttpRequest();
+        request.onload = function() {
+          var fileReader = new FileReader();
+          fileReader.onloadend = function() {
+            callback(fileReader.result);
+          };
+          fileReader.readAsDataURL(request.response);
+        };
+
+        request.responseType = "blob";
+        request.open("GET", src, true);
+        request.send();
+      }
+      
+      document.getElementById("file").onchange = function(e) {
+        var path = URL.createObjectURL(e.target.files[0]);
+        toDataURL(path, function(dataURL) {
+          file = dataURL;
+        }
       }
       
       function getAllUrlParams(url) {
