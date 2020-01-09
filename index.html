@@ -19,7 +19,7 @@
       </div>
 
       <form onsubmit="send();" onkeypress="return event.keyCode!=13">
-        <input id="message" type="text" placeholder="Say something nice" />
+        <input maxlength="200" id="message" type="text" placeholder="Say something nice" />
         <button type="button" onclick="send();">Send</button>
       </form>
     </main>
@@ -155,7 +155,7 @@
         if (!isNullOrEmpty(msg)) {
           msgBox.value = "";
           chat.scrollBy(0, 100000);
-          msg = msg.substring(0, 100);
+          msg = msg.substring(0, 200);
           saveToFirebase(msg, user);
         }
       }
