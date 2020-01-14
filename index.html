@@ -52,6 +52,7 @@
         if (result != null) {
           result = result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
           result = result.substring(0, 20);
+          result = result.trim();
           if (isNullOrEmpty(result)) {
             window.location.href = "https://oskar-codes.github.io/web-chat";
           } else {
@@ -82,6 +83,7 @@
         }
         user = user.substring(0, 35);
         user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        user = user.trim();
         localStorage.setItem("user", user);
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
@@ -95,6 +97,7 @@
           }
           newUser = newUser.substring(0, 35);
           newUser = newUser.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          newUser = newUser.trim();
           user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
@@ -159,7 +162,7 @@
         if (!isNullOrEmpty(msg)) {
           msgBox.value = "";
           chat.scrollBy(0, 100000);
-          msg = msg.substring(0, 200);
+          msg = msg.substring(0, 200).trim();
           saveToFirebase(msg, user);
         }
       }
