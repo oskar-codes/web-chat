@@ -77,13 +77,11 @@
       var userIp = "";
       var file = "none";
       if (!user) {
-        user = prompt("Choose a username");
+        user = prompt("Choose a username", "Guest");
         if (isNullOrEmpty(user)) {
           user = "Guest"
         }
-        user = user.substring(0, 35);
-        user = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        user = user.trim();
+        user = user.trim().substring(0, 35).replace(/</g, "&lt;").replace(/>/g, "&gt;");
         localStorage.setItem("user", user);
       }
       document.getElementsByClassName("user")[0].innerHTML = user;
@@ -95,9 +93,7 @@
           if (isNullOrEmpty(newUser)) {
             newUser = "Guest"
           }
-          newUser = newUser.substring(0, 35);
-          newUser = newUser.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-          newUser = newUser.trim();
+          newUser = newUser.trim().substring(0, 35).replace(/</g, "&lt;").replace(/>/g, "&gt;");
           user = newUser;
           localStorage.setItem("user", user);
           document.getElementsByClassName("user")[0].innerHTML = user;
