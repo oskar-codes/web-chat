@@ -42,8 +42,8 @@
       } else if (room == true || room == "") {
         window.location.href = "https://oskar-codes.github.io/web-chat";
       } else {
-        title.innerHTML = "Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/+/g, " ") +")";
-        window.document.title = decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/+/g, " ") +" | Oskar Codes";
+        title.innerHTML = "Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\+/g, " ") +")";
+        window.document.title = decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\+/g, " ") +" | Oskar Codes";
       }
       
       /*** HANDLE ROOM CHANGE ***/
