@@ -141,7 +141,7 @@
         var msg = snapshot.val().message;
         var time = snapshot.val().time;
         if (!isNullOrEmpty(time)) {
-          time = "("+ time +")";
+          time = " ("+ time +")";
         }
         chat.innerHTML += "<p><strong>" + usr + "</strong>"+ time +":</p><p style='margin-left: 7px;'>" + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p><hr style='border-color: #ddd; border-style: solid;'>";
         chat.scrollBy(0, 100000);
