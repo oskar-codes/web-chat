@@ -138,12 +138,21 @@
         var chat = document.getElementsByClassName("chat")[0];
         var usr = snapshot.val().user;
         var msg = snapshot.val().message;
+        
+        msg = msg
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+          .replace(/__(.+?)__/g,"<u>$1</u>")
+          .replace(/~~(.+?)~~/g,"<s>$1</s>")
+          .replace(/\*(.+?)\*/g,"<i>$1</i>")
+        
         var time = snapshot.val().time;
         if (usr !== "epicuwu") {
           if (!isNullOrEmpty(time)) {
             time = " ("+ time +")";
           }
-          chat.innerHTML += "<p><strong>" + usr + "</strong>"+ time +":</p><p style='margin-left: 7px;'>" + msg.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</p><hr style='border-color: #ddd; border-style: solid;'>";
+          chat.innerHTML += "<p><strong>" + usr + "</strong>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
 
           /*** DISPLAY NOTIFICATION ***/
