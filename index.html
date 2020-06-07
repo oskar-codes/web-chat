@@ -175,13 +175,15 @@
       
       /*** REQUEST PRIVATE CONVERSATION ***/
       function requestUser(requestID, requestUsername, fromUsername) {
-        firebase.database().ref("/broadcasts").push().set({
-          request: requestID,
-          fromID: uniqueID,
-          from: fromUsername,
-          to: requestUsername
-        });
-        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(requestID,uniqueID)}&name=${requestUsername}`);
+        if (requestID !== uniqueID) {
+          firebase.database().ref("/broadcasts").push().set({
+            request: requestID,
+            fromID: uniqueID,
+            from: fromUsername,
+            to: requestUsername
+          });
+          window.open(`https://oskar-codes.github.io/web-chat?room=${mix(requestID,uniqueID)}&name=${requestUsername}`);
+        }
       }
       
       /*** LISTEN FOR PRIVATE REQUESTS ***/
