@@ -179,9 +179,19 @@
           from: fromUsername,
           to: requestUsername
         });
-        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(requestID,uniqueID)}&name=${requestUsername}`)
+        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(requestID,uniqueID)}&name=${requestUsername}`);
       }
       
+      /*** LISTEN FOR PRIVATE REQUESTS ***/
+      firebase.database().ref("/broadcasts").on('child_added', (snapshot) => {
+        let val = snapshot.val();
+        
+        if (uniqueID === val.request) {
+          if (confirm(`${val.from} requested you to join a private discussion. Join?`)) {
+            window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.requestID,uniqueID)}&name=${val.from}`);
+          }
+        }
+      });
       
       /*** HANDLE MESSAGE BEFORE SENDING ***/
       function send() {
