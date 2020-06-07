@@ -168,7 +168,11 @@
       
       /*** REQUEST PRIVATE CONVERSATION ***/
       function requestUser(id) {
-        console.log(id);
+        firebase.database().ref("/broadcasts").push().set({
+          request: id
+        });
+        firebase.database().ref("/messages" + mix(id, uniqueID)).set({});
+        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(id,uniqueID)}`)
       }
       
       
@@ -233,6 +237,14 @@
           var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
           return v.toString(16);
         });
+      }
+
+      function mix(s1, s2) {
+        let result = "";
+        for (var i=0; i<s1.length; i++) {
+          result += String.fromCharCode(s1.charCodeAt(i) + s2.charCodeAt(i));
+        }
+        return result;
       }
       
       /*function toDataURL(src, callback) {
