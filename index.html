@@ -177,6 +177,7 @@
       function requestUser(requestID, requestUsername, fromUsername) {
         firebase.database().ref("/broadcasts").push().set({
           request: requestID,
+          fromID: uniqueID,
           from: fromUsername,
           to: requestUsername
         });
@@ -189,7 +190,7 @@
         
         if (uniqueID === val.request) {
           if (confirm(`${val.from} requested you to join a private discussion. Join?`)) {
-            window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.request,uniqueID)}&name=${val.from}`);
+            window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.fromID,uniqueID)}&name=${val.from}`);
           }
         }
         console.log(snapshot)
