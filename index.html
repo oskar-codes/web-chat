@@ -48,7 +48,7 @@
       var customName = getAllUrlParams().name;
       if (customName !== undefined && customName.trim() !== "" && customName !== true) {
         title.innerHTML = `Chat (${decodeURIComponent(customName)})`
-        window.document.title = decodeURIComponent(customName);
+        window.document.title = decodeURIComponent(customName) + " | Oskar Codes";
       }
       
       /*** HANDLE ROOM CHANGE ***/
@@ -259,7 +259,7 @@
       function mix(s1, s2) {
         let result = "";
         for (var i=0; i<s1.length; i++) {
-          result += String.fromCharCode(s1.charCodeAt(i) + s2.charCodeAt(i));
+          result += s1.charCodeAt(i) + s2.charCodeAt(i);
         }
         return result;
       }
