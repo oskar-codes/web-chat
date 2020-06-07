@@ -75,6 +75,7 @@
       var user = localStorage.getItem("user");
       var userIp = "";
       var file = "none";
+      var uniqueID = uuidv4();
       if (!user) {
         user = prompt("Choose a username", "Guest");
         if (isNullOrEmpty(user)) {
@@ -118,7 +119,8 @@
           message: msg,
           attachment: file,
           time: getDateTime(),
-          ip: userIp
+          ip: userIp,
+          id: uniqueID
         };
 
         firebase.database().ref('messages' + room).push().set(object)
@@ -138,21 +140,22 @@
         var chat = document.getElementsByClassName("chat")[0];
         var usr = snapshot.val().user;
         var msg = snapshot.val().message;
+        var id = snapshot.val().id;
         
         msg = msg
-          .replace(/</g, "&lt;")
+          .replace(/</g, "&lt;") // prevent HTML tags
           .replace(/>/g, "&gt;")
-          .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
-          .replace(/__(.+?)__/g,"<u>$1</u>")
-          .replace(/~~(.+?)~~/g,"<s>$1</s>")
-          .replace(/\*(.+?)\*/g,"<i>$1</i>")
+          .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>") // bold
+          .replace(/__(.+?)__/g,"<u>$1</u>") // underline
+          .replace(/~~(.+?)~~/g,"<s>$1</s>") // strikethrough
+          .replace(/\*(.+?)\*/g,"<i>$1</i>") // italic
         
         var time = snapshot.val().time;
-        if (usr !== "epicuwu" && usr !== "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" && usr !== "adsdfasfds") {
+        if (usr.trim() !== ") {
           if (!isNullOrEmpty(time)) {
             time = " ("+ time +")";
           }
-          chat.innerHTML += "<p><strong>" + usr + "</strong>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
+          chat.innerHTML += "<p><b onclick='requestUser(`"+ id +"`);' style='pointer: cursor;'>" + usr + "</b>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
 
           /*** DISPLAY NOTIFICATION ***/
@@ -162,6 +165,12 @@
           }
         }
       });
+      
+      /*** REQUEST PRIVATE CONVERSATION ***/
+      function requestUser(id) {
+        console.log(id);
+      }
+      
       
       /*** HANDLE MESSAGE BEFORE SENDING ***/
       function send() {
@@ -217,6 +226,13 @@
         }   
         var dateTime = day+'/'+month+'/'+year+' '+hour+':'+minute;   
          return dateTime;
+      }
+      
+      function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
       }
       
       /*function toDataURL(src, callback) {
