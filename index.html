@@ -81,7 +81,8 @@
       var user = localStorage.getItem("user");
       var userIp = "";
       var file = "none";
-      var uniqueID = uuidv4();
+      var uniqueID = localStorage.webChatID || uuidv4();
+      localStorage.webChatID = uniqueID;
       if (!user) {
         user = prompt("Choose a username", "Guest");
         if (isNullOrEmpty(user)) {
