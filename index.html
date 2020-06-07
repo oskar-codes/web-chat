@@ -155,7 +155,7 @@
           if (!isNullOrEmpty(time)) {
             time = " ("+ time +")";
           }
-          chat.innerHTML += "<p><b onclick='requestUser(`"+ id +"`);' style='pointer: cursor;'>" + usr + "</b>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
+          chat.innerHTML += "<p><b onclick='requestUser(`"+ id +"`);' style='cursor: pointer;'>" + usr + "</b>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
 
           /*** DISPLAY NOTIFICATION ***/
