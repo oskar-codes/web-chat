@@ -192,6 +192,8 @@
             window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.request,uniqueID)}&name=${val.from}`);
           }
         }
+        
+        firebase.database().ref(snapshot.ref()).set({});
       });
       
       /*** HANDLE MESSAGE BEFORE SENDING ***/
