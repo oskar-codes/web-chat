@@ -35,14 +35,20 @@
       /*** SETUP CURRENT ROOM ***/
       var room = getAllUrlParams().room;
       var title = document.getElementsByTagName("h1")[0];
-      if (room == undefined) {
+      if (room === undefined) {
         room = "";
         title.innerHTML = "Chat (Global)";
-      } else if (room == true || room == "") {
+      } else if (room === true || room.trim() === "") {
         window.location.href = "https://oskar-codes.github.io/web-chat";
       } else {
         title.innerHTML = "Chat ("+ decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\+/g, " ") +")";
         window.document.title = decodeURIComponent(room).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\+/g, " ") +" | Oskar Codes";
+      }
+      
+      var customName = getAllUrlParams().name;
+      if (customName !== undefined && customName.trim() !== "" && customName !== true) {
+        title.innerHTML = `Chat (${decodeURIComponent(customName)})`
+        window.document.title = decodeURIComponent(customName);
       }
       
       /*** HANDLE ROOM CHANGE ***/
@@ -155,7 +161,7 @@
           if (!isNullOrEmpty(time)) {
             time = " ("+ time +")";
           }
-          chat.innerHTML += "<p><b onclick='requestUser(`"+ id +"`);' style='cursor: pointer;'>" + usr + "</b>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
+          chat.innerHTML += "<p><b onclick='requestUser(`"+ id +"`, `"+ usr +"`, `"+ user +"`);' style='cursor: pointer;'>" + usr + "</b>"+ time +":</p><p style='margin-left: 7px;'>" + msg + "</p><hr style='border-color: #ddd; border-style: solid;'>";
           chat.scrollBy(0, 100000);
 
           /*** DISPLAY NOTIFICATION ***/
@@ -167,12 +173,13 @@
       });
       
       /*** REQUEST PRIVATE CONVERSATION ***/
-      function requestUser(id) {
+      function requestUser(requestID, requestUsername, fromUsername) {
         firebase.database().ref("/broadcasts").push().set({
-          request: id
+          request: requestID
+          from: fromUsername,
+          to: requestUsername
         });
-        firebase.database().ref("/messages" + mix(id, uniqueID)).set({});
-        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(id,uniqueID)}`)
+        window.open(`https://oskar-codes.github.io/web-chat?room=${mix(id,uniqueID)}&name=${requestUsername}`)
       }
       
       
