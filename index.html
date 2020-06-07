@@ -47,8 +47,8 @@
       
       var customName = getAllUrlParams().name;
       if (customName !== undefined && customName.trim() !== "" && customName !== true) {
-        title.innerHTML = `Chat (${decodeURIComponent(customName)})`
-        window.document.title = decodeURIComponent(customName) + " | Oskar Codes";
+        title.innerHTML = `Chat (${customName})`
+        window.document.title = customName + " | Oskar Codes";
       }
       
       /*** HANDLE ROOM CHANGE ***/
