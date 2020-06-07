@@ -188,7 +188,7 @@
         
         if (uniqueID === val.request) {
           if (confirm(`${val.from} requested you to join a private discussion. Join?`)) {
-            window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.requestID,uniqueID)}&name=${val.from}`);
+            window.open(`https://oskar-codes.github.io/web-chat?room=${mix(val.request,uniqueID)}&name=${val.from}`);
           }
         }
       });
