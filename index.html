@@ -175,7 +175,7 @@
       /*** REQUEST PRIVATE CONVERSATION ***/
       function requestUser(requestID, requestUsername, fromUsername) {
         firebase.database().ref("/broadcasts").push().set({
-          request: requestID
+          request: requestID,
           from: fromUsername,
           to: requestUsername
         });
