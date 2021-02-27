@@ -89,7 +89,7 @@ function saveToFirebase(msg, usr) {
   const object = {
     user: usr,
     message: msg,
-    attachment: file,
+    attachment: 'none',
     time: getDateTime(),
     ip: userIp,
     id: uniqueID
